@@ -1,0 +1,20 @@
+{
+  "v": 1,
+  "tasks": [
+    {"id": "json-valid", "type": "integrity", "expect": "all_agent_json_valid"},
+    {"id": "routes-list", "type": "router", "command": "routes", "expect": "core_routes_visible"},
+    {"id": "route-known", "type": "router", "command": "route workflow_review", "expect": "route_output"},
+    {"id": "route-unknown", "type": "router", "command": "route non_existing_route", "expect": "fallback_unknown_task"},
+    {"id": "policy-valid", "type": "policy", "expect": "destructive_and_subagent_rules_present"},
+    {"id": "contract-valid", "type": "contract", "expect": "required_sections_present"},
+    {"id": "reference-valid", "type": "reference", "expect": "route_refs_exist_or_virtual"},
+    {"id": "state-budget", "type": "state", "expect": "default_entry_files_lte_budget"},
+    {"id": "clean-release", "type": "release", "expect": "no_forbidden_temp_files"},
+    {"id": "stress-lite", "type": "stress", "command": "stress", "expect": "no_route_explosion"},
+    {"id": "subagent-required-doc", "type": "policy", "expect": "policy.subagent.required_doc_exists"},
+    {"id": "delivery-keywords", "type": "contract", "expect": "delivery_contract_checks_required_keywords"},
+    {"id": "gitignore-present", "type": "release", "expect": "temporary_reports_and_scratch_are_ignored"},
+    {"id": "mutation-missing-subagent-doc", "type": "mutation", "expect": "check_should_fail_when_subagent_doc_missing"},
+    {"id": "mutation-broken-json", "type": "mutation", "expect": "check_should_fail_when_agent_json_invalid"}
+  ]
+}
