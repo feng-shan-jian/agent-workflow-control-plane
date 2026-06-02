@@ -1,0 +1,34 @@
+{
+  "v": 1,
+  "default": {
+    "read_all": false,
+    "route_cli": true,
+    "route_pack_dir": ".agent/routes",
+    "default_entry_files": [
+      "AGENTS.md",
+      ".agent/state.json"
+    ]
+  },
+  "route_packs": [
+    ".agent/routes/core.json"
+  ],
+  "virtual_refs": [
+    "target",
+    "target_code",
+    "user_assets",
+    "related_logs_only",
+    "related_done_tasks_only",
+    "route_output",
+    "final_report"
+  ],
+  "reference_policy": {
+    "must_exist_prefixes": [
+      "AGENTS.md",
+      ".agent/",
+      "docs/",
+      "spec/",
+      "workflow/"
+    ],
+    "allow_virtual_refs": true
+  }
+}
