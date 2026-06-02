@@ -1,0 +1,20 @@
+# Runtime / dependency directories
+node_modules/
+
+# Temporary work directories
+scratch/
+tmp/
+pressure_work/
+test_process/
+
+# Generated validation artifacts that should not be committed
+测试报告-*.md
+最终全量测试报告-*.md
+预览-*.md
+delivery-contract-test.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
