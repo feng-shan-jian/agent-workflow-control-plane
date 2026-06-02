@@ -1,0 +1,71 @@
+{
+  "v": 1,
+  "pack": "core",
+  "routes": {
+    "unknown_task": {
+      "purpose": "安全兜底：未知任务先窄化分类，禁止全量读取。",
+      "read": ["AGENTS.md", ".agent/state.json", "docs/project-info.md"],
+      "steps": ["classify_task", "locate_target_files", "select_nearest_route", "read_related_only"],
+      "blocked": ["read_all_docs", "read_all_logs", "modify_without_classification"],
+      "final": ["docs/code-review.md"]
+    },
+    "workflow_review": {
+      "purpose": "审查当前工作流设计是否存在损失性压缩、链条断裂、规则失效。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/policy.json", ".agent/lifecycle.json", "target"],
+      "final": ["docs/code-review.md"],
+      "subagent": "evaluate"
+    },
+    "redteam_review": {
+      "purpose": "红队审查机制、流程、版本设计和风险点。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/policy.json", ".agent/lifecycle.json", ".agent/output-contract.json", "target"],
+      "final": ["docs/code-review.md"],
+      "subagent": "required_if_complex"
+    },
+    "design_compare": {
+      "purpose": "比较多个版本或方案，输出评分与锁定建议。",
+      "read": ["AGENTS.md", ".agent/state.json", "target", "workflow/records"],
+      "final": ["docs/code-review.md"]
+    },
+    "mechanism_patch": {
+      "purpose": "在不膨胀 AGENTS.md 的前提下修改机制文件。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/context.json", ".agent/routes/core.json", ".agent/policy.json", ".agent/lifecycle.json", ".agent/output-contract.json", "target"],
+      "commands": ["node .agent/check.mjs"],
+      "final": ["docs/code-review.md"]
+    },
+    "lifecycle_hardening": {
+      "purpose": "补强状态机、dirty、GC、route learning、final gate 等生命周期机制。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/lifecycle.json", ".agent/policy.json", ".agent/routes/core.json"],
+      "commands": ["node .agent/check.mjs", "node .agent/check.mjs test"],
+      "final": ["docs/code-review.md"]
+    },
+    "functional_test": {
+      "purpose": "运行机制功能测试。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/test-tasks.json"],
+      "commands": ["node .agent/check.mjs test"],
+      "final": ["docs/code-review.md"]
+    },
+    "stability_test": {
+      "purpose": "测试状态漂移、dirty、route 失配、输出契约和交付包清洁。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/test-tasks.json", ".agent/check.mjs"],
+      "commands": ["node .agent/check.mjs", "node .agent/check.mjs test"],
+      "final": ["docs/code-review.md"]
+    },
+    "pressure_test": {
+      "purpose": "模拟大量任务和异常组合，检查路由爆炸、状态膨胀、文件污染。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/test-tasks.json", ".agent/check.mjs"],
+      "commands": ["node .agent/check.mjs stress"],
+      "final": ["docs/code-review.md"]
+    },
+    "package_release": {
+      "purpose": "清理测试痕迹并输出正式项目包、测试报告、预览文件。",
+      "read": ["AGENTS.md", ".agent/state.json", ".agent/output-contract.json", ".agent/policy.json"],
+      "commands": ["node .agent/check.mjs", "node .agent/check.mjs test"],
+      "final": ["docs/code-review.md"]
+    },
+    "codex_handoff": {
+      "purpose": "生成给 Codex 继续执行流程的提示词和接手说明。",
+      "read": ["AGENTS.md", ".agent/state.json", "CODEX_CONTINUE_PROMPT.md", "README.md"],
+      "final": ["docs/code-review.md"]
+    }
+  }
+}
