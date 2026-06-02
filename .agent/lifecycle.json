@@ -1,0 +1,72 @@
+{
+  "v": 1,
+  "phases": [
+    {
+      "name": "boot",
+      "requires": [
+        "AGENTS.md",
+        ".agent/state.json"
+      ],
+      "checks": [
+        "json_valid",
+        "state_valid"
+      ]
+    },
+    {
+      "name": "route",
+      "requires": [
+        "route_selected_or_unknown_task"
+      ],
+      "checks": [
+        "route_exists",
+        "route_refs_valid"
+      ]
+    },
+    {
+      "name": "plan",
+      "requires": [
+        "scope_defined",
+        "subagent_decision_recorded"
+      ],
+      "checks": [
+        "no_full_context_by_default"
+      ]
+    },
+    {
+      "name": "execute",
+      "requires": [
+        "minimal_change",
+        "target_files_only"
+      ],
+      "checks": [
+        "policy_respected"
+      ]
+    },
+    {
+      "name": "verify",
+      "requires": [
+        "relevant_checks_run_or_reason_recorded"
+      ],
+      "checks": [
+        "check_mjs_passes"
+      ]
+    },
+    {
+      "name": "close",
+      "requires": [
+        "state_updated_or_reason_recorded",
+        "delivery_contract_complete_or_reason_recorded"
+      ],
+      "checks": [
+        "no_scratch_in_release",
+        "no_test_process_in_mechanism_files"
+      ]
+    }
+  ],
+  "failure_policy": {
+    "route_missing": "fallback_unknown_task",
+    "check_failed": "stop_and_fix_mechanism_first",
+    "state_stale": "refresh_dirty_related_scope_only",
+    "unknown_repeated": "record_route_learning_queue"
+  }
+}
