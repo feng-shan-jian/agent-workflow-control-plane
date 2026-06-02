@@ -1,0 +1,81 @@
+{
+  "v": 1,
+  "destructive_operations": {
+    "require_explicit_confirmation": [
+      "delete_file_or_directory",
+      "clear_database",
+      "drop_database_table",
+      "reset_git_history",
+      "force_overwrite_user_code",
+      "modify_production_config",
+      "irreversible_migration",
+      "format_entire_project",
+      "install_or_upgrade_major_dependency",
+      "execute_menu_permission_role_or_init_sql"
+    ],
+    "sql_policy": "menu_permission_database_sql_must_be_draft_only_unless_user_confirms_execution"
+  },
+  "comments_and_encoding": {
+    "vibe_coding_required_for_changed_files": true,
+    "comment_syntax": {
+      "js_ts_java_c_cpp": "// vibe coding",
+      "python_shell_yaml_properties": "# vibe coding",
+      "css_scss_sql": "/* vibe coding */",
+      "vue_html_markdown_xml": "<!-- vibe coding -->"
+    },
+    "forbidden_comment_targets": [
+      "package.json",
+      "lock_files",
+      ".env",
+      "binary_files",
+      "generated_files",
+      ".json"
+    ],
+    "json_rules": [
+      "no_comments",
+      "no_trailing_commas",
+      "no_markdown_content"
+    ],
+    "chinese_must_be_readable": true,
+    "prefer_utf8_if_unknown": true
+  },
+  "component_docs": {
+    "create_or_update_for": [
+      "new_component",
+      "high_reuse_component",
+      "complex_public_component"
+    ],
+    "skip_for": [
+      "simple_private_display_component"
+    ]
+  },
+  "subagent": {
+    "decision_required_before_development": true,
+    "must_prefer_when": [
+      "frontend_backend_database_permission_two_or_more",
+      "multi_page_complex_form_subtable_drawer_flow_or_prototype",
+      "visual_restore_screenshot_compare_complex_transition",
+      "high_risk_bug_unknown_build_api_permission_failure",
+      "second_round_after_failed_fix",
+      "independent_dev_and_qa_required",
+      "user_explicitly_requests_multi_agent"
+    ],
+    "required_doc": "docs/subagent-collaboration.md"
+  },
+  "context_cleanliness": {
+    "forbid_in_mechanism_files": [
+      "scratch_notes",
+      "chain_of_thought",
+      "test_process",
+      "long_logs",
+      "chat_transcripts"
+    ],
+    "release_exclude": [
+      "scratch",
+      "tmp",
+      "pressure_work",
+      "test_process",
+      "delivery-contract-test.md"
+    ]
+  }
+}
