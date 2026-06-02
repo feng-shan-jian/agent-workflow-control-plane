@@ -1,0 +1,40 @@
+{
+  "v": 1,
+  "project": "agent-workflow-control-plane",
+  "project_init_status": "initialized",
+  "repo_rev": "github-initial-release-2026-06-02",
+  "state_updated_at": "2026-06-02",
+  "dirty": {
+    "structure": false,
+    "policy": false,
+    "lifecycle": false,
+    "routes": false,
+    "tests": false,
+    "logs": false,
+    "delivery_contract": false
+  },
+  "budget": {
+    "mode": "minimal",
+    "default_entry_files": ["AGENTS.md", ".agent/state.json"],
+    "max_default_files": 2,
+    "log_summary_limit": 5
+  },
+  "active": {
+    "task": null,
+    "route": null,
+    "scope": [],
+    "subagent_decision": null
+  },
+  "router_cli": {
+    "enabled": true,
+    "unknown_fallback": "unknown_task",
+    "route_pack_index": ".agent/context.json"
+  },
+  "route_learning_queue": [],
+  "route_gc": {
+    "candidate_threshold": 2,
+    "promote_threshold": 3,
+    "max_queue": 20,
+    "unused_route_policy": "deprecate_or_move_to_route_pack"
+  }
+}
